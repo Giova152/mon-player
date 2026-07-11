@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../domain/entities/playlist.dart';
 import '../../../domain/repositories/playlist_repository.dart';
-import '../../models/hive/playlist_hive_model.dart';
+import '../models/hive/playlist_hive_model.dart';
 
 /// Implémentation concrète du PlaylistRepository.
 class PlaylistRepositoryImpl implements PlaylistRepository {
