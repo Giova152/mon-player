@@ -4,8 +4,8 @@ import 'package:hive/hive.dart';
 import '../../../core/constants/hive_constants.dart';
 import '../../../domain/entities/song.dart';
 import '../../../domain/repositories/music_repository.dart';
-import '../../models/hive/song_hive_model.dart';
-import '../../models/hive/app_settings_hive_model.dart';
+import '../models/hive/song_hive_model.dart';
+import '../models/hive/app_settings_hive_model.dart';
 import '../audio_scanner_service.dart';
 
 /// Implémentation concrète du MusicRepository.
