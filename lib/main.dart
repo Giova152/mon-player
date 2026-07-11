@@ -1,9 +1,9 @@
-// ignore_for_file: unused_import
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:metadata_god/metadata_god.dart';
 
 import 'core/constants/hive_constants.dart';
 import 'core/theme/app_theme.dart';
@@ -31,6 +31,9 @@ Future<void> main() async {
     androidNotificationOngoing: true,
     androidStopForegroundOnPause: true,
   );
+
+  // Initialisation du plugin de métadonnées audio
+  MetadataGod.initialize();
 
   // Initialisation de Hive pour le stockage local
   await Hive.initFlutter();
