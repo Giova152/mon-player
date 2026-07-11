@@ -7,9 +7,6 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
-      ios_signing:
-        distribution_type: app_store  # ou 'ad_hoc' pour TestFlight
-        bundle_identifier: com.monplayer.mon_player
     
     triggering:
       events:
@@ -37,16 +34,19 @@ workflows:
         script: |
           flutter analyze --no-fatal-infos
           
-      - name: Build iOS IPA
+      - name: Build Unsigned iOS App
         script: |
-          flutter build ipa \
-            --release \
-            --export-options-plist=/Users/builder/export_options.plist
+          # Compile sans signature
+          flutter build ios --release --no-codesign
+          
+          # Prépare le fichier IPA (Payload) pour Sideloadly / AltStore
+          cd build/ios/iphoneos
+          mkdir -p Payload
+          mv Runner.app Payload/
+          zip -qr MonPlayer-Unsigned.ipa Payload
     
     artifacts:
-      - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
-      - flutter_drive.log
+      - build/ios/iphoneos/MonPlayer-Unsigned.ipa
     
     publishing:
       email:
