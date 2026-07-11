@@ -1,0 +1,57 @@
+workflows:
+  ios-workflow:
+    name: MonPlayer iOS Build
+    max_build_duration: 60
+    
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      ios_signing:
+        distribution_type: app_store  # ou 'ad_hoc' pour TestFlight
+        bundle_identifier: com.monplayer.mon_player
+    
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+    
+    scripts:
+      - name: Set up Flutter
+        script: |
+          flutter doctor
+          
+      - name: Get Flutter dependencies
+        script: |
+          flutter pub get
+          
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios
+          pod install
+          cd ..
+          
+      - name: Flutter analyze
+        script: |
+          flutter analyze --no-fatal-infos
+          
+      - name: Build iOS IPA
+        script: |
+          flutter build ipa \
+            --release \
+            --export-options-plist=/Users/builder/export_options.plist
+    
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    
+    publishing:
+      email:
+        recipients:
+          - midogiova@gmail.com
+        notify:
+          success: true
+          failure: true
