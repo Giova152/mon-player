@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers/audio_handler_provider.dart';
-import '../../widgets/common/song_tile.dart';
 import '../../widgets/common/artwork_widget.dart';
-import '../player/player_screen.dart';
 import 'playlist_detail_screen.dart';
 
 /// Onglet Playlists.

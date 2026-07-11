@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -30,8 +29,6 @@ class SongTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final playerAsync = ref.watch(playerProvider);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     final isPlaying = playerAsync.whenOrNull(
           data: (state) => state.currentSong?.id == song.id,
         ) ??
